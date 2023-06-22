@@ -5,5 +5,9 @@ GlfwHandler::GlfwHandler(/* args */) {}
 
 GlfwHandler::~GlfwHandler() {}
 
+int GlfwHandler::Initialize() {
+    
+}
+
 }  // namespace handler
 }  // namespace metal

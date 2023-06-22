@@ -7,6 +7,8 @@ class Handler {
  public:
   Handler(){};
   virtual ~Handler(){};
+
+  virtual int Initialize() = 0;
 };
 }  // namespace handler
 }  // namespace metal
