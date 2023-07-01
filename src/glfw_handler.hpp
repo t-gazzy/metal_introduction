@@ -18,7 +18,8 @@ class GlfwHandler : public Handler {
   GlfwHandler& operator=(GlfwHandler&&) = delete;
   ~GlfwHandler();
 
-  int Initialize() override;
+  bool Initialize(bool is_full_screen,
+                  std::unique_ptr<GlfwInitOptions> options) override;
 
  private:
   /* data */
