@@ -38,6 +38,9 @@ target_include_directories(
 target_link_libraries(
     ${PROJECT_NAME}
     PRIVATE
-    #${OPENGL_LIBRARIES}
+    "-framework Cocoa"
+    "-framework Foundation"
+    "-framework Metal"
+    "-framework QuartzCore"
     ${GLFW_LIBRARIES}
 )
