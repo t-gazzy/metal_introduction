@@ -5,8 +5,8 @@
 
 int main() {
   std::cout << "hello world" << std::endl;
-  auto option = std::make_unique<metal::handler::GlfwInitOptions>();
-  auto ptr = std::make_unique<metal::handler::GlfwHandler>();
+  auto option = std::make_unique<glfw::handler::GlfwInitOptions>();
+  auto ptr = std::make_unique<glfw::handler::GlfwHandler>();
   auto result = ptr->Initialize(true, std::move(option));
   std::cout << "result: " << result << std::endl;
   return 0;

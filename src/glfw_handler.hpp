@@ -5,7 +5,7 @@
 
 #include "handler.hpp"
 
-namespace metal {
+namespace glfw {
 namespace handler {
 class GlfwHandler : public Handler {
  public:
@@ -25,5 +25,5 @@ class GlfwHandler : public Handler {
   /* data */
 };
 }  // namespace handler
-}  // namespace metal
+}  // namespace glfw
 #endif  // GLFW_HANDLER_HPP

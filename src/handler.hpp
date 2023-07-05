@@ -4,7 +4,7 @@
 #include <memory>
 #include <string>
 
-namespace metal {
+namespace glfw {
 namespace handler {
 
 struct GlfwInitOptions {
@@ -22,6 +22,6 @@ class Handler {
                           std::unique_ptr<GlfwInitOptions> options) = 0;
 };
 }  // namespace handler
-}  // namespace metal
+}  // namespace glfw
 
 #endif  // HANDLER_HPP

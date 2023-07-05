@@ -1,5 +1,5 @@
 #include "glfw_handler.hpp"
-namespace metal {
+namespace glfw {
 namespace handler {
 GlfwHandler::GlfwHandler(/* args */) {}
 
@@ -56,4 +56,4 @@ bool GlfwHandler::Initialize(
 }
 
 }  // namespace handler
-}  // namespace metal
+}  // namespace glfw
