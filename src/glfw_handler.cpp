@@ -37,7 +37,7 @@ bool GlfwHandler::Initialize(
   } else if (options != nullptr) {
     glfwWindowHint(GLFW_RESIZABLE, 0);
     window = glfwCreateWindow(options->width, options->height,
-                              options->title.c_str(), NULL, NULL)
+                              options->title.c_str(), NULL, NULL);
   } else {
     return false;
   }
