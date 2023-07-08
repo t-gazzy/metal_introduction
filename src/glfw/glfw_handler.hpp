@@ -1,12 +1,15 @@
-#ifndef GLFW_HANDLER_HPP
-#define GLFW_HANDLER_HPP
+#ifndef GLFW_GLFW_HANDLER_HPP
+#define GLFW_GLFW_HANDLER_HPP
 
 #include <GLFW/glfw3.h>
 
+#include <memory>
+
+#include "glfw_wrapper.hpp"
 #include "handler.hpp"
 
-namespace glfw {
-namespace handler {
+namespace glfw::handler {
+
 class GlfwHandler : public Handler {
  public:
   GlfwHandler();
@@ -18,12 +21,11 @@ class GlfwHandler : public Handler {
   GlfwHandler& operator=(GlfwHandler&&) = delete;
   ~GlfwHandler();
 
-  bool Initialize(bool is_full_screen,
-                  std::unique_ptr<GlfwInitOptions> options) override;
+  bool Initialize() override;
 
  private:
-  /* data */
+  std::unique_ptr<wrapper::GlfwWrapper> wrapper_ =
+      std::make_unique<wrapper::GlfwWrapper>();
 };
-}  // namespace handler
-}  // namespace glfw
-#endif  // GLFW_HANDLER_HPP
+}  // namespace glfw::handler
+#endif  // GLFW_GLFW_HANDLER_HPP
