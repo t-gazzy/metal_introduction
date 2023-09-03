@@ -12,6 +12,7 @@ class Handler {
   virtual ~Handler(){};
 
   virtual bool Initialize() = 0;
+  virtual bool MakeWindow(int width, int height, const std::string &title) = 0;
 };
 }  // namespace glfw::handler
 

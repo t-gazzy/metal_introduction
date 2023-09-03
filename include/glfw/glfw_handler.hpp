@@ -22,6 +22,7 @@ class GlfwHandler : public Handler {
   ~GlfwHandler();
 
   bool Initialize() override;
+  bool MakeWindow(int width, int height, const std::string &title) override;
 
  private:
   std::unique_ptr<wrapper::GlfwWrapper> wrapper_ =
