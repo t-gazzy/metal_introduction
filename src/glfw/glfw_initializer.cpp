@@ -1,4 +1,4 @@
-#include "glfw_initializer.hpp"
+#include <glfw/glfw_initializer.hpp>
 
 namespace glfw::handler {
 GlfwInitializer::GlfwInitializer(const std::shared_ptr<Handler> ptr)
