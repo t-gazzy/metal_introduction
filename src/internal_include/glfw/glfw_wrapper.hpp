@@ -29,11 +29,11 @@ class GlfwWrapper {
   /// mode.
   /// @param share share the resource if set the window's handle.
   /// @return window
-  GLFWWindow *GlfwCreateWindow(int width, int height, const char *title,
+  GLFWwindow *GlfwCreateWindow(int width, int height, const char *title,
                                GLFWmonitor *monitor, GLFWwindow *share);
   /// @brief make the window renderring target.
   /// @param window GLFWwindow
-  void GlfwMakeContextCurrent(GLFWWindow *window);
+  void GlfwMakeContextCurrent(GLFWwindow *window);
 };
 }  // namespace glfw::wrapper
 

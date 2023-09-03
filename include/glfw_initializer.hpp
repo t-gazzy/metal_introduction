@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "handler.hpp"
+#include <interface/handler.hpp>
 
 namespace glfw::handler {
 class GlfwInitializer {

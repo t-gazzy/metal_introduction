@@ -5,8 +5,8 @@
 
 #include <memory>
 
-#include "glfw_wrapper.hpp"
-#include "handler.hpp"
+#include <glfw/glfw_wrapper.hpp>
+#include <interface/handler.hpp>
 
 namespace glfw::handler {
 
