@@ -5,6 +5,13 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 find_package(GLFW REQUIRED)
 
+add_subdirectory(deps)
+find_library(GL
+    NAMES gl
+    PATHS ${CMAKE_CURRENT_SOURCE_DIR}/build/deps
+    REQUIRED
+)
+
 add_executable(${PROJECT_NAME})
 add_subdirectory(src)
 target_sources(${PROJECT_NAME} PRIVATE main.cpp)
@@ -46,4 +53,5 @@ target_link_libraries(
     # "-framework Metal"
     # "-framework QuartzCore"
     ${GLFW_LIBRARIES}
+    ${GL}
 )

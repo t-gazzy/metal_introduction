@@ -16,6 +16,8 @@ class Window {
   ~Window();
 
   bool MakeWindow(int width, int height, const std::string &title);
+  void SetColor(float red, float green, float blue, float alpha);
+  bool CloseWindow();
 
  private:
   std::shared_ptr<handler::Handler> handler_;

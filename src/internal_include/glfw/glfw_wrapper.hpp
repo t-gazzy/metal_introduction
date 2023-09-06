@@ -34,6 +34,13 @@ class GlfwWrapper {
   /// @brief make the window renderring target.
   /// @param window GLFWwindow
   void GlfwMakeContextCurrent(GLFWwindow *window);
+  /// @brief replace the window color buffer to another one.
+  /// @param window window
+  void GlfwSwapBuffers(GLFWwindow *window);
+  /// @brief Close the window
+  /// @param window 
+  /// @return result
+  bool GlfwCloseWindow(GLFWwindow *window);
 };
 }  // namespace glfw::wrapper
 

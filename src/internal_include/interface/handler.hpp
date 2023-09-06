@@ -13,6 +13,8 @@ class Handler {
 
   virtual bool Initialize() = 0;
   virtual bool MakeWindow(int width, int height, const std::string &title) = 0;
+  virtual void SetWindowColor(float red, float green, float blue, float alpha) = 0;
+  virtual bool CloseWindow() = 0;
 };
 }  // namespace glfw::handler
 

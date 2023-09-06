@@ -14,6 +14,14 @@ GLFWwindow *GlfwWrapper::GlfwCreateWindow(int width, int height,
 }
 
 void GlfwWrapper::GlfwMakeContextCurrent(GLFWwindow *window) {
-  return glfwMakeContextCurrent(window);
+  glfwMakeContextCurrent(window);
+}
+
+void GlfwWrapper::GlfwSwapBuffers(GLFWwindow *window) {
+  glfwSwapBuffers(window);
+}
+
+bool GlfwWrapper::GlfwCloseWindow(GLFWwindow *window) {
+  return glfwWindowShouldClose(window);
 }
 }  // namespace glfw::wrapper

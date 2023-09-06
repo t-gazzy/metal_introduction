@@ -7,8 +7,24 @@ GlfwHandler::~GlfwHandler() {}
 
 bool GlfwHandler::Initialize() { return wrapper_->GlfwInit(); }
 bool GlfwHandler::MakeWindow(int width, int height, const std::string &title) {
-  auto result = wrapper_->GlfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
-  return result != nullptr;
+  window_ = wrapper_->GlfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
+  if (window_ == nullptr) {
+    return false;
+  }
+  wrapper_->GlfwMakeContextCurrent(window_);
+  wrapper_->GlfwSwapBuffers(window_);
+  return true;
+}
+
+void GlfwHandler::SetWindowColor(float red, float green, float blue, float alpha) {
+  gl_->GlClearColor(red, green, blue, alpha);
+}
+
+bool GlfwHandler::CloseWindow() {
+  if (window_ == nullptr) {
+    return false;
+  }
+  return wrapper_->GlfwCloseWindow(window_);
 }
 
 }  // namespace handler
