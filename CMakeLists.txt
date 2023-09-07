@@ -43,6 +43,7 @@ target_include_directories(
     ${GLFW_INCLUDE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${CMAKE_CURRENT_SOURCE_DIR}/src/internal_include
+    ${CMAKE_CURRENT_SOURCE_DIR}/deps/include
 )
 
 target_link_libraries(

@@ -9,7 +9,7 @@ class GladWrapper {
   GladWrapper(const GladWrapper &) = delete;
   GladWrapper &operator=(const GladWrapper &) = delete;
   GladWrapper(GladWrapper &&) = delete;
-  GladWrapper operator=(GladWrapper &&) = delete;
+  GladWrapper &operator=(GladWrapper &&) = delete;
   ~GladWrapper();
 
   /// @brief set window color

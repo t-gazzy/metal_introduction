@@ -13,7 +13,7 @@ class GlfwWrapper {
   GlfwWrapper &operator=(const GlfwWrapper &) = delete;
   // delete move constructor
   GlfwWrapper(GlfwWrapper &&) = delete;
-  GlfwWrapper operator=(GlfwWrapper &&) = delete;
+  GlfwWrapper &operator=(GlfwWrapper &&) = delete;
   ~GlfwWrapper();
 
   /// @brief OpenGL method, go to https://www.glfw.org/docs/3.3/.

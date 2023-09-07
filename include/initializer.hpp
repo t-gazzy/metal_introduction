@@ -13,7 +13,7 @@ class Initializer {
   Initializer &operator=(const Initializer &) = delete;
   // delete move constructor
   Initializer(Initializer &&) = delete;
-  Initializer operator=(Initializer &&) = delete;
+  Initializer &operator=(Initializer &&) = delete;
   ~Initializer();
 
   bool Initialize();
