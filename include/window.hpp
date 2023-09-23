@@ -17,6 +17,7 @@ class Window {
 
   bool MakeWindow(int width, int height, const std::string &title);
   void SetColor(float red, float green, float blue, float alpha);
+  void ClearColor();
   bool CloseWindow();
 
  private:

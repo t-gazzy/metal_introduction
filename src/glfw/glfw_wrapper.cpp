@@ -21,6 +21,10 @@ void GlfwWrapper::GlfwSwapBuffers(GLFWwindow *window) {
   glfwSwapBuffers(window);
 }
 
+void GlfwWrapper::GlfwWaitEvent() {
+  glfwWaitEvents();
+}
+
 bool GlfwWrapper::GlfwCloseWindow(GLFWwindow *window) {
   return glfwWindowShouldClose(window);
 }

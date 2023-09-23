@@ -5,8 +5,6 @@
 #include <thread>
 #include <window.hpp>
 
-int counter = 0;
-
 int main() {
   auto lib = std::make_shared<glfw::handler::GlfwHandler>();
   auto ptr = std::make_unique<glfw::Initializer>(lib);
@@ -27,15 +25,11 @@ int main() {
   }
 
   window->SetColor(255.0, 0.0, 0.0, 1.0);
+  std::cout << "set color ok" << std::endl;
 
-  while (true) {
-    if (counter > 10) {
-      window->CloseWindow();
-      break;
-    }
-    std::this_thread::sleep_for(std::chrono::seconds(1));
-    counter++;
-    std::cout << "counter: " << counter << std::endl;
+  while (!window->CloseWindow()) {
+    std::cout << "clear color" << std::endl;
+    window->ClearColor();
   }
 
   return 0;

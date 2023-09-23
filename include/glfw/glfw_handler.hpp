@@ -24,6 +24,7 @@ class GlfwHandler : public Handler {
   bool Initialize() override;
   bool MakeWindow(int width, int height, const std::string& title) override;
   void SetWindowColor(float red, float green, float blue, float alpha) override;
+  void ClearColor() override;
   bool CloseWindow() override;
 
  private:

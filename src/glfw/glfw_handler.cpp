@@ -12,12 +12,18 @@ bool GlfwHandler::MakeWindow(int width, int height, const std::string &title) {
     return false;
   }
   wrapper_->GlfwMakeContextCurrent(window_);
-  wrapper_->GlfwSwapBuffers(window_);
+  gl_->GlLoad();
   return true;
 }
 
 void GlfwHandler::SetWindowColor(float red, float green, float blue, float alpha) {
   gl_->GlClearColor(red, green, blue, alpha);
+}
+
+void GlfwHandler::ClearColor() {
+  gl_->GlClear();
+  wrapper_->GlfwSwapBuffers(window_);
+  wrapper_->GlfwWaitEvent();
 }
 
 bool GlfwHandler::CloseWindow() {
