@@ -1,4 +1,5 @@
 #include <glad/gl.h>
+// `GLFW/glfw3.h` has to be included after `<glad/gl.h>`.
 #include <GLFW/glfw3.h>
 
 #include <glad/glad_wrapper.hpp>
