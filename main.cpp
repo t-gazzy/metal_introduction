@@ -24,13 +24,15 @@ int main() {
     return 0;
   }
 
-  window->SetColor(255.0, 0.0, 0.0, 1.0);
+  window->SetColor(255.0f, 0.0f, 0.0f, 1.0f);
   std::cout << "set color ok" << std::endl;
+  std::this_thread::sleep_for(std::chrono::seconds(10));
 
-  while (!window->CloseWindow()) {
-    std::cout << "clear color" << std::endl;
-    window->ClearColor();
-  }
+  // while (!window->CloseWindow()) {
+  //   std::cout << "clear color" << std::endl;
+  //   window->ClearColor();
+  //   std::this_thread::sleep_for(std::chrono::seconds(1));
+  // }
 
   return 0;
 }

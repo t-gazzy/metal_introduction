@@ -1,10 +1,30 @@
 #include <glfw/glfw_wrapper.hpp>
+#include <iostream>
 
 namespace glfw::wrapper {
 GlfwWrapper::GlfwWrapper() {}
 GlfwWrapper::~GlfwWrapper() {}
 
-bool GlfwWrapper::GlfwInit() { return glfwInit(); }
+static void glfwError(int id, const char *description) {
+  std::cout << "Error Occured: " << description << std::endl;
+}
+
+bool GlfwWrapper::GlfwInit() {
+  glfwSetErrorCallback(&glfwError);
+  return glfwInit();
+}
+
+void GlfwWrapper::GlfwSetVersion(int major_version, int minor_version,
+                                 bool is_use_old_profile,
+                                 bool is_core_profile) {
+  auto is_old_profile = is_use_old_profile == true ? GL_TRUE : GL_FALSE;
+  auto is_core = is_core_profile == true ? GLFW_OPENGL_CORE_PROFILE
+                                         : GLFW_OPENGL_COMPAT_PROFILE;
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major_version);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor_version);
+  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, is_core_profile);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, is_core);
+}
 
 GLFWwindow *GlfwWrapper::GlfwCreateWindow(int width, int height,
                                           const char *title,
@@ -21,9 +41,7 @@ void GlfwWrapper::GlfwSwapBuffers(GLFWwindow *window) {
   glfwSwapBuffers(window);
 }
 
-void GlfwWrapper::GlfwWaitEvent() {
-  glfwWaitEvents();
-}
+void GlfwWrapper::GlfwWaitEvent() { glfwWaitEvents(); }
 
 bool GlfwWrapper::GlfwCloseWindow(GLFWwindow *window) {
   return glfwWindowShouldClose(window);
