@@ -6,18 +6,16 @@ Window::Window(const std::shared_ptr<handler::Handler> handler)
 Window::~Window() {}
 
 bool Window::MakeWindow(int width, int height, const std::string &title) {
-    return handler_->MakeWindow(width, height, title);
+  return handler_->MakeWindow(width, height, title);
 }
 
 void Window::SetColor(float red, float green, float blue, float alpha) {
-    handler_->SetWindowColor(red, green, blue, alpha);
+  handler_->SetWindowColor(red, green, blue, alpha);
 }
 
-void Window::ClearColor() {
-    
-}
+void Window::LoopToshow() { handler_->Swapbuffer(); }
 
-bool Window::CloseWindow() {
-    return handler_->CloseWindow();
-}
+void Window::ClearColor() {}
+
+bool Window::CloseWindow() { return handler_->CloseWindow(); }
 }  // namespace glfw

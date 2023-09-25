@@ -35,6 +35,7 @@ GLFWwindow *GlfwWrapper::GlfwCreateWindow(int width, int height,
 
 void GlfwWrapper::GlfwMakeContextCurrent(GLFWwindow *window) {
   glfwMakeContextCurrent(window);
+  glfwSwapInterval(1);
 }
 
 void GlfwWrapper::GlfwSwapBuffers(GLFWwindow *window) {

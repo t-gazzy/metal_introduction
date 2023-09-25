@@ -25,6 +25,13 @@ bool GlfwHandler::MakeWindow(int width, int height, const std::string &title) {
 void GlfwHandler::SetWindowColor(float red, float green, float blue,
                                  float alpha) {
   gl_->GlClearColor(red, green, blue, alpha);
+  // gl_->GlClear();
+  // wrapper_->GlfwSwapBuffers(window_);
+  // wrapper_->GlfwWaitEvent();
+}
+
+void GlfwHandler::Swapbuffer() {
+  gl_->GlClear();
   wrapper_->GlfwSwapBuffers(window_);
   wrapper_->GlfwWaitEvent();
 }
