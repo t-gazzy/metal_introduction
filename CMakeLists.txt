@@ -3,12 +3,17 @@ project(sample)
 set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-find_package(GLFW REQUIRED)
 
 # add_subdirectory(deps)
 find_library(GL
     NAMES gl
     PATHS ${CMAKE_CURRENT_SOURCE_DIR}/deps/build
+    REQUIRED
+)
+
+find_library(GLFW
+    NAME glfw.3
+    PATHS ${CMAKE_CURRENT_SOURCE_DIR}/libs/macos
     REQUIRED
 )
 
@@ -39,8 +44,6 @@ target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
 target_include_directories(
     ${PROJECT_NAME}
     PRIVATE
-    # ${OPENGL_INCLUDE_DIR}
-    ${GLFW_INCLUDE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${CMAKE_CURRENT_SOURCE_DIR}/src/internal_include
     ${CMAKE_CURRENT_SOURCE_DIR}/deps/include
@@ -53,6 +56,6 @@ target_link_libraries(
     # "-framework Foundation"
     # "-framework Metal"
     # "-framework QuartzCore"
-    ${GLFW_LIBRARIES}
+    ${GLFW}
     ${GL}
 )

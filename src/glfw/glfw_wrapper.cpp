@@ -11,6 +11,7 @@ static void glfwError(int id, const char *description) {
 
 bool GlfwWrapper::GlfwInit() {
   glfwSetErrorCallback(&glfwError);
+  atexit(glfwTerminate);
   return glfwInit();
 }
 
