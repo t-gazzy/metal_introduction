@@ -36,6 +36,8 @@ GLFWwindow *GlfwWrapper::GlfwCreateWindow(int width, int height,
 
 void GlfwWrapper::GlfwMakeContextCurrent(GLFWwindow *window) {
   glfwMakeContextCurrent(window);
+  // V-sync
+  // it means that sync the framerate with monitor refresh rate. 
   glfwSwapInterval(1);
 }
 
