@@ -26,13 +26,12 @@ void GlfwHandler::SetWindowColor(float red, float green, float blue,
                                  float alpha) {
   
   gl_->GlClearColor(red, green, blue, alpha);
-  // gl_->GlClear();
-  // wrapper_->GlfwSwapBuffers(window_);
-  // wrapper_->GlfwWaitEvent();
+  gl_->CreateProgram();
 }
 
 void GlfwHandler::Swapbuffer() {
   gl_->GlClear();
+  gl_->StartUseShader();
   wrapper_->GlfwSwapBuffers(window_);
   wrapper_->GlfwWaitEvent();
 }
