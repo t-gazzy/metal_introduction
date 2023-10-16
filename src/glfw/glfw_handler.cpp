@@ -26,7 +26,7 @@ void GlfwHandler::SetWindowColor(float red, float green, float blue,
                                  float alpha) {
   
   gl_->GlClearColor(red, green, blue, alpha);
-  gl_->CreateProgram();
+  gl_->LoadProgram();
 }
 
 void GlfwHandler::Swapbuffer() {

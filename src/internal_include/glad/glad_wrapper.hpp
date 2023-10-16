@@ -25,22 +25,33 @@ class GladWrapper {
   /// @brief Clear Color setting
   void GlClear();
 
-  /// @brief Create shader program
-  /// @return
-  GLuint CreateProgram();
+  /// @brief Load Shader Object
+  /// @return 
+  GLuint LoadProgram();
 
-  /// @brief Create shader program
-  /// @param vertex_program_text
-  /// @param fragment_program_text
+  /// @brief Load Shader Object
+  /// @param vertex vertex shader object path
+  /// @param fragment fragment shader object path
   /// @return
-  GLuint CreateProgram(const std::string &vertex_program_text,
-                       const std::string &fragment_program_text);
+  GLuint LoadProgram(const std::string &vertex, const std::string &fragment);
 
   /// @brief start to use shader program.
   /// @return bool
   bool StartUseShader();
 
  private:
+  /// @brief Check Shader object is compilable.
+  /// @param shader shader object
+  /// @param name name
+  /// @return
+  GLboolean AssertShadeObject(GLuint shader, const std::string &name);
+
+  /// @brief Check program object is compilable.
+  /// @param shader shader object
+  /// @param name name
+  /// @return
+  GLboolean AssertProgram(GLuint shader, const std::string &name);
+
   GLuint program_ = 0;
 };
 

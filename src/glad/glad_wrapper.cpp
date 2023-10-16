@@ -2,8 +2,11 @@
 // `GLFW/glfw3.h` has to be included after `<glad/gl.h>`.
 #include <GLFW/glfw3.h>
 
+#include <filesystem>
 #include <glad/glad_wrapper.hpp>
+#include <glad/reader.hpp>
 #include <iostream>
+#include <vector>
 
 namespace gl::wrapper {
 GladWrapper::GladWrapper() {}
@@ -37,28 +40,56 @@ void GladWrapper::GlClearColor(float red, float green, float blue,
 
 void GladWrapper::GlClear() { glClear(GL_COLOR_BUFFER_BIT); }
 
-GLuint GladWrapper::CreateProgram() {
-  return this->CreateProgram(g_vertex_src, g_fragment_src);
+GLuint GladWrapper::LoadProgram() {
+  std::string path = std::filesystem::current_path().c_str();
+  auto vertex_file = path + "/src/shader/vertex.vert";
+  auto fragment_file = path + "/src/shader/fragment.frag";
+  ;
+  std::cout << "vertex_file: " << vertex_file << std::endl;
+  std::cout << "fragment_file: " << fragment_file << std::endl;
+  return this->LoadProgram(vertex_file, fragment_file);
 }
 
-GLuint GladWrapper::CreateProgram(const std::string &vertex_program_text,
-                                  const std::string &fragment_program_text) {
+GLuint GladWrapper::LoadProgram(const std::string &vertex,
+                                const std::string &fragment) {
+  auto reader = std::make_unique<Reader>();
+  auto v_state = reader->Read(vertex);
+  auto f_state = reader->Read(fragment);
+  if (v_state == std::nullopt) {
+    std::cout << "v_state is nullopt" << std::endl;
+    return GL_FALSE;
+  }
+
+  if (f_state == std::nullopt) {
+    std::cout << "f_state is nullopt" << std::endl;
+    return GL_FALSE;
+  }
   auto program = glCreateProgram();
 
   // make vertex shader object
   auto vertex_obj = glCreateShader(GL_VERTEX_SHADER);
-  auto vertex_src = vertex_program_text.c_str();
-  glShaderSource(vertex_obj, 1, &vertex_src, nullptr);
+  auto vertex_src = v_state.value();
+  auto vertex_text = vertex_src.data();
+  glShaderSource(vertex_obj, 1, &vertex_text, nullptr);
   glCompileShader(vertex_obj);
-  glAttachShader(program, vertex_obj);
+
+  if (this->AssertShadeObject(vertex_obj, "vertex_shader")) {
+    std::cout << "Assert Vertex Object OK" << std::endl;
+    glAttachShader(program, vertex_obj);
+  }
   glDeleteShader(vertex_obj);
 
   // make fragment shader object
   auto fragment_obj = glCreateShader(GL_FRAGMENT_SHADER);
-  auto fragment_src = fragment_program_text.c_str();
-  glShaderSource(fragment_obj, 1, &fragment_src, nullptr);
+  auto fragment_src = f_state.value();
+  auto fragment_text = fragment_src.data();
+  glShaderSource(fragment_obj, 1, &fragment_text, nullptr);
   glCompileShader(fragment_obj);
-  glAttachShader(program, fragment_obj);
+
+  if (this->AssertShadeObject(fragment_obj, "fragment_shader")) {
+    std::cout << "Assert Fragment Object OK" << std::endl;
+    glAttachShader(program, fragment_obj);
+  }
   glDeleteShader(fragment_obj);
 
   // link program object
@@ -77,6 +108,52 @@ bool GladWrapper::StartUseShader() {
 
   glUseProgram(program_);
   return true;
+}
+
+/**
+ * Private
+ */
+GLboolean GladWrapper::AssertShadeObject(GLuint shader,
+                                         const std::string &name) {
+  GLint status;
+  glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
+  if (status == GL_FALSE) {
+    std::cout << name << ": "
+              << "Link Error" << std::endl;
+    return GL_FALSE;
+  }
+
+  GLsizei buffer_size;
+  glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &buffer_size);
+
+  if (buffer_size > 1) {
+    std::vector<GLchar> info_log(buffer_size);
+    GLsizei length;
+    glGetShaderInfoLog(shader, buffer_size, &length, &info_log.front());
+    std::cout << "Info Log " << name << ": " << &info_log.front() << std::endl;
+  }
+  return static_cast<GLboolean>(status);
+}
+
+GLboolean GladWrapper::AssertProgram(GLuint program, const std::string &name) {
+  GLint status;
+  glGetProgramiv(program, GL_LINK_STATUS, &status);
+  if (status == GL_FALSE) {
+    std::cout << name << ": "
+              << "Link Error" << std::endl;
+    return GL_FALSE;
+  }
+
+  GLsizei buffer_size;
+  glGetProgramiv(program, GL_INFO_LOG_LENGTH, &buffer_size);
+
+  if (buffer_size > 1) {
+    std::vector<GLchar> info_log(buffer_size);
+    GLsizei length;
+    glGetProgramInfoLog(program, buffer_size, &length, &info_log.front());
+    std::cout << "Info Log " << name << ": " << &info_log.front() << std::endl;
+  }
+  return static_cast<GLboolean>(status);
 }
 
 }  // namespace gl::wrapper
